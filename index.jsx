@@ -1,11 +1,19 @@
 import React from 'react';
-import {AppRegistry, Text, View} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View} from 'react-native';
+import Router from './src/Router.jsx';
 
 const App = () => (
-  <View>
-    <Text>Hello World</Text>
+  <View style={styles.container}>
+    <Router/>
   </View>
 ); 
+
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'purple',
+  }
+});
 
 export default App;
 
