@@ -1,6 +1,6 @@
 import PartyList from './PartyList.jsx';
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Image, View, Text, StyleSheet} from 'react-native';
 
 const fakePartyData = [
   {name: 'Fetish Tribe'},
@@ -15,23 +15,42 @@ const fakePartyData = [
   {name: 'Inferno'},
 ];
 
+const Header = () => (
+  <View style={styles.header}>
+   <Image 
+    style={styles.icon} 
+    source={{uri: 'https://cdn4.iconfinder.com/data/icons/wirecons-free-vector-icons/32/menu-alt-512.png'}}/>
+    <Text style={styles.headerText}>Orgynizer</Text>
+  </View>
+);
+
 const Home = () => (
   <View>
-    <View style={styles.header}>
-      <Text style={styles.headerText}>Orgynizer</Text>
+    <Header/>
+    <View style={styles.listContainer}>
+      <PartyList parties={fakePartyData}/>
     </View>
-    <PartyList parties={fakePartyData}/>
   </View>
 );
 
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'white',
-    textAlign: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   headerText: {
+    flexGrow: 1,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  icon: {
+    height: 32,
+    width: 32,
+  },
+  listContainer: {
+    padding: 12,
   }
 });
 
