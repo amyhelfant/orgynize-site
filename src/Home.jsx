@@ -1,19 +1,7 @@
 import PartyList from './PartyList.jsx';
 import React from 'react';
 import {Image, View, Text, StyleSheet} from 'react-native';
-
-const fakePartyData = [
-  {name: 'Fetish Tribe'},
-  {name: 'Chemistry'},
-  {name: 'Lady Euphoria'},
-  {name: 'The Wink'},
-  {name: 'NSFW'},
-  {name: 'Hacienda House'},
-  {name: 'Playscapes'},
-  {name: 'Wonderland'},
-  {name: 'Skirt Club'},
-  {name: 'Inferno'},
-];
+import {useSelector} from 'react-redux';
 
 const Header = () => (
   <View style={styles.header}>
@@ -24,14 +12,17 @@ const Header = () => (
   </View>
 );
 
-const Home = () => (
-  <View>
-    <Header/>
-    <View style={styles.listContainer}>
-      <PartyList parties={fakePartyData}/>
+const Home = () => {
+  const parties = useSelector(state => state.parties.parties);
+  return (
+    <View>
+      <Header/>
+      <View style={styles.listContainer}>
+        <PartyList parties={parties}/>
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   header: {
