@@ -1,4 +1,7 @@
-var plugins = []
+var plugins = [{
+      plugin: require('/workspace/orgynize/packages/web/node_modules/gatsby-plugin-react-native-web/gatsby-ssr'),
+      options: {"plugins":[]},
+    }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
 //   {

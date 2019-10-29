@@ -9,10 +9,13 @@
   "license": "ISC",
   "dependencies": {
     "gatsby": "^2.17.6",
+    "gatsby-plugin-react-native-web": "^2.0.0-beta.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-plugin-react-native-web": "^0.6.1"
+  },
   "keywords": [],
   "description": ""
 }
