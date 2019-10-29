@@ -1,0 +1,14 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.18.3"
+  },
+  "dependencies": {
+    "gatsby": "^2.17.6",
+    "react-art": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-native-web": "^0.11.7",
+    "react-primitives": "^0.8.0"
+  }
+}
