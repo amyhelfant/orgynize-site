@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, Touchable, StyleSheet, View } from "react-primitives";
+import { Image, Text, Touchable, StyleSheet, View } from "react-primitives";
 import { TextInput } from "react-native-web";
+import logo from '../images/logo.png';
 
 const encode = data => {
     return Object.keys(data)
@@ -24,6 +25,8 @@ const App = () => {
     };
     return (
         <View style={styles.container}>
+            <Image style={styles.image } source={logo}/>
+            {/* <img src={logo}/> */}
             <Text style={styles.title}>
                 For party planners that are not freaks in the spreadsheets.
             </Text>
@@ -46,6 +49,10 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+    image: {
+        height: '100%',
+        width: '100%'
+    },
     text: {
         color: "white"
     },

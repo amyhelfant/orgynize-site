@@ -9,20 +9,18 @@ var _utils = require("@reach/router/lib/utils");
 
 var _stripPrefix = _interopRequireDefault(require("./strip-prefix"));
 
-var _normalizePagePath = _interopRequireDefault(
-    require("./normalize-page-path")
-);
+var _normalizePagePath = _interopRequireDefault(require("./normalize-page-path"));
 
 const pathCache = new Map();
 let matchPaths = [];
 
 const trimPathname = rawPathname => {
-    let pathname = decodeURIComponent(rawPathname); // Remove the pathPrefix from the pathname.
+  let pathname = decodeURIComponent(rawPathname); // Remove the pathPrefix from the pathname.
 
-    let trimmedPathname = (0, _stripPrefix.default)(pathname, __BASE_PATH__) // Remove any hashfragment
-        .split(`#`)[0] // Remove search query
-        .split(`?`)[0];
-    return trimmedPathname;
+  let trimmedPathname = (0, _stripPrefix.default)(pathname, __BASE_PATH__) // Remove any hashfragment
+  .split(`#`)[0] // Remove search query
+  .split(`?`)[0];
+  return trimmedPathname;
 };
 /**
  * Set list of matchPaths
@@ -30,8 +28,9 @@ const trimPathname = rawPathname => {
  * @param {Array<{path: string, matchPath: string}>} value collection of matchPaths
  */
 
+
 const setMatchPaths = value => {
-    matchPaths = value;
+  matchPaths = value;
 };
 /**
  * Return a matchpath url
@@ -42,18 +41,22 @@ const setMatchPaths = value => {
  * @return {string|null}
  */
 
+
 exports.setMatchPaths = setMatchPaths;
 
 const findMatchPath = rawPathname => {
-    const trimmedPathname = cleanPath(rawPathname);
+  const trimmedPathname = cleanPath(rawPathname);
 
-    for (const { matchPath, path } of matchPaths) {
-        if ((0, _utils.match)(matchPath, trimmedPathname)) {
-            return (0, _normalizePagePath.default)(path);
-        }
+  for (const {
+    matchPath,
+    path
+  } of matchPaths) {
+    if ((0, _utils.match)(matchPath, trimmedPathname)) {
+      return (0, _normalizePagePath.default)(path);
     }
+  }
 
-    return null;
+  return null;
 }; // Given a raw URL path, returns the cleaned version of it (trim off
 // `#` and query params), or if it matches an entry in
 // `match-paths.json`, its matched path is returned
@@ -63,23 +66,24 @@ const findMatchPath = rawPathname => {
 // Or if `match-paths.json` contains `{ "/foo*": "/page1", ...}`, then
 // `/foo?bar=far` => `/page1`
 
+
 exports.findMatchPath = findMatchPath;
 
 const findPath = rawPathname => {
-    const trimmedPathname = trimPathname(rawPathname);
+  const trimmedPathname = trimPathname(rawPathname);
 
-    if (pathCache.has(trimmedPathname)) {
-        return pathCache.get(trimmedPathname);
-    }
+  if (pathCache.has(trimmedPathname)) {
+    return pathCache.get(trimmedPathname);
+  }
 
-    let foundPath = findMatchPath(trimmedPathname);
+  let foundPath = findMatchPath(trimmedPathname);
 
-    if (!foundPath) {
-        foundPath = cleanPath(rawPathname);
-    }
+  if (!foundPath) {
+    foundPath = cleanPath(rawPathname);
+  }
 
-    pathCache.set(trimmedPathname, foundPath);
-    return foundPath;
+  pathCache.set(trimmedPathname, foundPath);
+  return foundPath;
 };
 /**
  * Clean a url and converts /index.html => /
@@ -89,18 +93,19 @@ const findPath = rawPathname => {
  * @return {string}
  */
 
+
 exports.findPath = findPath;
 
 const cleanPath = rawPathname => {
-    const trimmedPathname = trimPathname(rawPathname);
-    let foundPath = trimmedPathname;
+  const trimmedPathname = trimPathname(rawPathname);
+  let foundPath = trimmedPathname;
 
-    if (foundPath === `/index.html`) {
-        foundPath = `/`;
-    }
+  if (foundPath === `/index.html`) {
+    foundPath = `/`;
+  }
 
-    foundPath = (0, _normalizePagePath.default)(foundPath);
-    return foundPath;
+  foundPath = (0, _normalizePagePath.default)(foundPath);
+  return foundPath;
 };
 
 exports.cleanPath = cleanPath;

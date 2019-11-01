@@ -13,19 +13,21 @@ var _loader = _interopRequireDefault(require("./loader"));
 
 var _jsonStore = _interopRequireDefault(require("./json-store"));
 
-const DevPageRenderer = ({ location }) => {
-    const pageResources = _loader.default.loadPageSync(location.pathname);
+const DevPageRenderer = ({
+  location
+}) => {
+  const pageResources = _loader.default.loadPageSync(location.pathname);
 
-    return _react.default.createElement(_jsonStore.default, {
-        location,
-        pageResources
-    });
+  return _react.default.createElement(_jsonStore.default, {
+    location,
+    pageResources
+  });
 };
 
 DevPageRenderer.propTypes = {
-    location: _propTypes.default.shape({
-        pathname: _propTypes.default.string.isRequired
-    }).isRequired
+  location: _propTypes.default.shape({
+    pathname: _propTypes.default.string.isRequired
+  }).isRequired
 };
 var _default = DevPageRenderer;
 exports.default = _default;
