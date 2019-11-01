@@ -1,64 +1,73 @@
-import React from 'react';
-import {Text, Touchable, StyleSheet, View} from 'react-primitives';
-import {TextInput} from 'react-native-web';
+import React from "react";
+import { Text, Touchable, StyleSheet, View } from "react-primitives";
+import { TextInput } from "react-native-web";
 
-const encode = (data) => {
+const encode = data => {
     return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .map(
+            key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
         .join("&");
-  }
+};
 
 const App = () => {
     const handleSubmit = e => {
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "contact", ...this.state })
-      })
-        .then(() => alert("Success!"))
-        .catch(error => alert(error));
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode({ "form-name": "contact", ...this.state })
+        })
+            .then(() => alert("Success!"))
+            .catch(error => alert(error));
 
-      e.preventDefault();
+        e.preventDefault();
     };
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
                 For party planners that are not freaks in the spreadsheets.
             </Text>
-            <form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}>
+            <form
+                name="contact"
+                method="post"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+            >
                 <input type="hidden" name="form-name" value="contact" />
-                <Text style={[styles.text]}>Want to be notified when we're ready for you to start partying?</Text>
+                <Text style={[styles.text]}>
+                    Want to be notified when we're ready for you to start
+                    partying?
+                </Text>
                 <TextInput placeholder="Your email here" />
             </form>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     text: {
-        color: 'white',
+        color: "white"
     },
     form: {
-        alignContent: 'center',
-        flexDirection: 'row',
+        alignContent: "center",
+        flexDirection: "row",
         flexGrow: 1,
-        justifyContent: 'space-between',
+        justifyContent: "space-between"
     },
     container: {
-        backgroundColor: '#000',
-        height: '100vh',
+        backgroundColor: "#000",
+        height: "100vh",
         padding: 64,
-        width: '100vw',
+        width: "100vw"
     },
     title: {
-        color: 'white',
-        fontFamily: 'Over the Rainbow',
+        color: "white",
+        fontFamily: "Over the Rainbow",
         fontSize: 64,
-        textAlign: 'center',
+        textAlign: "center"
     },
-    footer: {
-
-    }
+    footer: {}
 });
 
 export default App;
