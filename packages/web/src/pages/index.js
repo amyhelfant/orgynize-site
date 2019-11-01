@@ -50,8 +50,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
     image: {
-        height: '100%',
-        width: '100%'
+        flex: 1,
+        alignSelf: 'stretch',
+        width: undefined,
+        height: undefined
     },
     text: {
         color: "white"
