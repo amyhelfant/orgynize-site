@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, Text, Touchable, StyleSheet, View } from "react-primitives";
 import { TextInput } from "react-native-web";
-import logo from '../images/logo.png';
+import logo from "../images/logo.png";
+import { Helmet } from "react-helmet";
 
 const encode = data => {
     return Object.keys(data)
@@ -25,9 +26,10 @@ const App = () => {
     };
     return (
         <View style={styles.container}>
-            <Image style={styles.image } source={logo}/>
-            {/* <img src={logo}/> */}
-            <Text style={styles.title}>
+            <Helmet></Helmet>
+            <Image style={styles.image} source={logo} resizeMode="contain" />
+
+            {/* <Text style={styles.title}>
                 For party planners that are not freaks in the spreadsheets.
             </Text>
             <form
@@ -43,7 +45,7 @@ const App = () => {
                     partying?
                 </Text>
                 <TextInput placeholder="Your email here" />
-            </form>
+            </form> */}
         </View>
     );
 };
@@ -51,7 +53,7 @@ const App = () => {
 const styles = StyleSheet.create({
     image: {
         flex: 1,
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
         width: undefined,
         height: undefined
     },
