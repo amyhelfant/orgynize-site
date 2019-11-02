@@ -27,7 +27,7 @@ const App = () => {
     return (
         <View style={styles.container}>
             <Helmet>
-                <style>{"body { background-color: #000; }"}</style>
+                <style>{'body { background-color: #000; }'}</style>
             </Helmet>
             <Image style={styles.image} source={logo} resizeMode="contain" />
 
@@ -35,7 +35,7 @@ const App = () => {
                 For party planners that are not freaks in the spreadsheets.
             </Text>
             <form
-                style={{ flexDirection: "row" }}
+                style={{flexDirection: 'row'}}
                 name="contact"
                 method="post"
                 data-netlify="true"
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     input: {
         fontSize: 18,
         paddingHorizontal: 12,
-        paddingVertical: 16
+        paddingVertical: 16,
     },
     text: {
         color: "white"
@@ -102,12 +102,12 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     inputContainer: {
-        backgroundColor: "white",
+        backgroundColor: 'white',
         borderRadius: 20,
         flex: 1,
-        justifyContent: "center",
+        justifyContent: 'center',
         paddingHorizontal: 12,
-        paddingVertical: 16
+        paddingVertical: 16,
     }
 });
 
