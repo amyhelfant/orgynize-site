@@ -26,13 +26,16 @@ const App = () => {
     };
     return (
         <View style={styles.container}>
-            <Helmet></Helmet>
+            <Helmet>
+                <style>{"body { background-color: #000; }"}</style>
+            </Helmet>
             <Image style={styles.image} source={logo} resizeMode="contain" />
 
-            {/* <Text style={styles.title}>
+            <Text style={styles.title}>
                 For party planners that are not freaks in the spreadsheets.
             </Text>
             <form
+                style={{ flexDirection: "row" }}
                 name="contact"
                 method="post"
                 data-netlify="true"
@@ -44,8 +47,21 @@ const App = () => {
                     Want to be notified when we're ready for you to start
                     partying?
                 </Text>
-                <TextInput placeholder="Your email here" />
-            </form> */}
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        autoFocus={true}
+                        autoCompleteType="email"
+                        blurOnSubmit={true}
+                        keyboardAppearance="light"
+                        keyboardType="email-address"
+                        style={styles.input}
+                        placeholder="Your email here"
+                    />
+                </View>
+            </form>
+            <View style={styles.footer}>
+                <Text style={styles.text}>TCAD</Text>
+            </View>
         </View>
     );
 };
@@ -57,6 +73,11 @@ const styles = StyleSheet.create({
         width: undefined,
         height: undefined
     },
+    input: {
+        fontSize: 18,
+        paddingHorizontal: 12,
+        paddingVertical: 16
+    },
     text: {
         color: "white"
     },
@@ -67,7 +88,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     container: {
-        backgroundColor: "#000",
         height: "100vh",
         padding: 64,
         width: "100vw"
@@ -78,7 +98,17 @@ const styles = StyleSheet.create({
         fontSize: 64,
         textAlign: "center"
     },
-    footer: {}
+    footer: {
+        flexDirection: "row"
+    },
+    inputContainer: {
+        backgroundColor: "white",
+        borderRadius: 20,
+        flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: 12,
+        paddingVertical: 16
+    }
 });
 
 export default App;

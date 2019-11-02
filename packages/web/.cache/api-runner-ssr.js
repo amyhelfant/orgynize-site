@@ -4,6 +4,10 @@ var plugins = [
         options: { plugins: [] }
     },
     {
+        plugin: require("/workspace/orgynize/packages/web/node_modules/gatsby-plugin-react-helmet/gatsby-ssr"),
+        options: { plugins: [] }
+    },
+    {
         plugin: require("/workspace/orgynize/packages/web/node_modules/gatsby-plugin-prefetch-google-fonts/gatsby-ssr"),
         options: { plugins: [], fonts: [{ family: "Over the Rainbow" }] }
     }
