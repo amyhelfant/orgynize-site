@@ -8,6 +8,9 @@ module.exports = {
                 fonts: [
                     {
                         family: `Over the Rainbow`
+                    },
+                    {
+                        family: "Abel"
                     }
                 ]
             }
