@@ -23,15 +23,22 @@ const App = () => {
     const [screenWidth, setScreenWidth] = React.useState(
         Dimensions.get("window").width
     );
+    const [screenHeight, setScreenHeight] = React.useState(
+        Dimensions.get("window").height
+    );
     React.useEffect(() => {
         Dimensions.addEventListener("change", newDimensions => {
-            const { width } = newDimensions.window;
+            const { height, width } = newDimensions.window;
             if (screenWidth > 0 && screenWidth !== width) {
-                setScreenWidth(newDimensions.window.width);
+                setScreenWidth(width);
+            }
+
+            if (screenHeight > 0 && screenHeight !== height) {
+                setScreenHeight(height);
             }
         });
         return Dimensions.removeEventListener("change");
-    }, [screenWidth]);
+    }, [screenHeight, screenWidth]);
 
     const handleSubmit = e => {
         fetch("/", {
@@ -58,8 +65,13 @@ const App = () => {
     };
 
     const responsiveStyles = StyleSheet.create({
+        container: {
+            height: screenHeight,
+            padding: 20,
+            width: screenWidth
+        },
         title: {
-            fontSize: widthPercentageToDP("10%"),
+            fontSize: widthPercentageToDP("8%"),
             color: "white",
             fontFamily: "Over the Rainbow",
             textAlign: "center"
@@ -67,7 +79,7 @@ const App = () => {
     });
 
     return (
-        <View style={styles.container}>
+        <View style={responsiveStyles.container}>
             <Helmet>
                 <style>
                     {
@@ -100,15 +112,25 @@ const App = () => {
                 </Text>
                 <View style={styles.inputContainer}>
                     <TextInput
-                        autoFocus={true}
                         autoCompleteType="email"
                         blurOnSubmit={true}
                         keyboardAppearance="light"
                         keyboardType="email-address"
-                        style={styles.input}
+                        style={{
+                            backgroundColor: "white",
+                            borderRadius: 20,
+                            height: 40,
+                            paddingHorizontal: 16,
+                            paddingVertical: 12
+                        }}
                         placeholder="Your email here"
                     />
                 </View>
+                <Touchable>
+                    <View style={styles.button}>
+                        <Text style={styles.text}>GO</Text>
+                    </View>
+                </Touchable>
             </form>
             <View style={styles.footer}>
                 <Text style={styles.text}>Orgynize by TCAD</Text>
@@ -118,6 +140,12 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "green",
+        borderRadius: 8,
+        justifyContent: "center",
+        padding: 12
+    },
     label: {
         flex: 1
     },
@@ -129,7 +157,10 @@ const styles = StyleSheet.create({
     },
     input: {
         fontSize: 18,
-        padding: 20
+        fontFamily: "Abel",
+        padding: 20,
+        height: "40px",
+        marginVertical: 16
     },
     text: {
         color: "white",
@@ -141,25 +172,18 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: "space-between"
     },
-    container: {
-        height: "100vh",
-        padding: 20,
-        width: "100vw"
-    },
     footer: {
-        borderTopWidth: 1,
+        borderTopWidth: 0.25,
         borderTopColor: "white",
         flexDirection: "row",
         marginTop: 48,
-        paddingTop: 20
+        paddingTop: 12
     },
     inputContainer: {
-        backgroundColor: "white",
-        borderRadius: 20,
         flex: 1,
         justifyContent: "center",
-        paddingHorizontal: 12,
-        paddingVertical: 16
+        marginStart: 16,
+        marginEnd: 8
     }
 });
 
