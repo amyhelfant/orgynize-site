@@ -26,6 +26,9 @@ const App = () => {
     const [screenHeight, setScreenHeight] = React.useState(
         Dimensions.get("window").height
     );
+    const [showConfirmation, setShowConfirmation] = React.useState(false);
+    const [email, setEmail] = React.useState(null);
+
     React.useEffect(() => {
         Dimensions.addEventListener("change", newDimensions => {
             const { height, width } = newDimensions.window;
@@ -41,12 +44,16 @@ const App = () => {
     }, [screenHeight, screenWidth]);
 
     const handleSubmit = e => {
+        if (email == null || email.length <= 0) {
+            return;
+        }
+
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode({ "form-name": "contact", ...this.state })
+            body: encode({ "form-name": "contact", email: email })
         })
-            .then(() => alert("Success!"))
+            .then(() => setShowConfirmation(true))
             .catch(error => console.log(error));
 
         e.preventDefault();
@@ -71,7 +78,7 @@ const App = () => {
             width: screenWidth
         },
         title: {
-            fontSize: widthPercentageToDP("8%"),
+            fontSize: widthPercentageToDP("7%"),
             color: "white",
             fontFamily: "Over the Rainbow",
             textAlign: "center"
@@ -97,41 +104,52 @@ const App = () => {
 
             <Image style={styles.image} source={logo} resizeMode="contain" />
 
-            <form
-                style={{ display: "flex", flexDirection: "row" }}
-                name="contact"
-                method="post"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
-                onSubmit={handleSubmit}
-            >
-                <input type="hidden" name="form-name" value="contact" />
-                <Text style={[styles.text, styles.label]}>
-                    Want to be notified when we're ready for you to start
-                    partying?
-                </Text>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        autoCompleteType="email"
-                        blurOnSubmit={true}
-                        keyboardAppearance="light"
-                        keyboardType="email-address"
-                        style={{
-                            backgroundColor: "white",
-                            borderRadius: 20,
-                            height: 40,
-                            paddingHorizontal: 16,
-                            paddingVertical: 12
-                        }}
-                        placeholder="Your email here"
-                    />
-                </View>
-                <Touchable>
-                    <View style={styles.button}>
-                        <Text style={styles.text}>GO</Text>
+            {!showConfirmation ? (
+                <form
+                    style={{ display: "flex", flexDirection: "row" }}
+                    name="contact"
+                    method="post"
+                    data-netlify="true"
+                    data-netlify-honeypot="bot-field"
+                    onSubmit={handleSubmit}
+                >
+                    <input type="hidden" name="form-name" value="contact" />
+                    <Text style={[styles.text, styles.label]}>
+                        Want to be notified when we're ready for you to start
+                        partying?
+                    </Text>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            autoCompleteType="email"
+                            blurOnSubmit={true}
+                            keyboardAppearance="light"
+                            keyboardType="email-address"
+                            style={{
+                                backgroundColor: "white",
+                                borderRadius: 20,
+                                height: 40,
+                                paddingHorizontal: 16,
+                                paddingVertical: 12
+                            }}
+                            placeholder="Your email here"
+                            onChange={({ nativeEvent }) =>
+                                setEmail(nativeEvent.text)
+                            }
+                        />
                     </View>
-                </Touchable>
-            </form>
+                    <Touchable onPress={handleSubmit}>
+                        <View style={styles.button}>
+                            <Text style={styles.text}>GO</Text>
+                        </View>
+                    </Touchable>
+                </form>
+            ) : (
+                <View>
+                    <Text style={[styles.text, styles.confirmationText]}>
+                        🍑🍑🍑 Stay tuned{"..."} 🍑🍑🍑
+                    </Text>
+                </View>
+            )}
             <View style={styles.footer}>
                 <Text style={styles.text}>Orgynize by TCAD</Text>
             </View>
@@ -141,6 +159,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
     button: {
+        alignSelf: "center",
         backgroundColor: "green",
         borderRadius: 8,
         justifyContent: "center",
@@ -178,6 +197,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginTop: 48,
         paddingTop: 12
+    },
+    confirmationText: {
+        fontWeight: 600,
+        fontSize: 18,
+        textAlign: "center"
     },
     inputContainer: {
         flex: 1,
