@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    Animated,
     Dimensions,
     Image,
     Text,
@@ -28,6 +29,9 @@ const App = () => {
     );
     const [showConfirmation, setShowConfirmation] = React.useState(false);
     const [email, setEmail] = React.useState(null);
+    const [opacity, setOpacity] = React.useState(new Animated.Value(0));
+
+    React.useEffect(() => onLoad(), []);
 
     React.useEffect(() => {
         Dimensions.addEventListener("change", newDimensions => {
@@ -85,6 +89,14 @@ const App = () => {
         }
     });
 
+    const onLoad = () => {
+        Animated.timing(opacity, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true
+        }).start();
+    };
+
     return (
         <View style={responsiveStyles.container}>
             <Helmet>
@@ -98,51 +110,83 @@ const App = () => {
                 <link rel="canonical" href="https://orgynize.app" />
             </Helmet>
 
-            <Text adjustsFontSizeToFit={true} style={responsiveStyles.title}>
+            <Animated.Text
+                adjustsFontSizeToFit={true}
+                style={[
+                    responsiveStyles.title,
+                    {
+                        opacity: opacity,
+                        transform: [
+                            {
+                                scale: opacity.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [0.75, 1]
+                                })
+                            }
+                        ]
+                    }
+                ]}
+            >
                 For party planners that are not freaks in the spreadsheets.
-            </Text>
+            </Animated.Text>
 
             <Image style={styles.image} source={logo} resizeMode="contain" />
 
             {!showConfirmation ? (
-                <form
-                    style={{ display: "flex", flexDirection: "row" }}
-                    name="contact"
-                    method="post"
-                    data-netlify="true"
-                    data-netlify-honeypot="bot-field"
-                    onSubmit={handleSubmit}
+                <Animated.View
+                    style={[
+                        {
+                            opacity: opacity,
+                            transform: [
+                                {
+                                    scale: opacity.interpolate({
+                                        inputRange: [0, 1],
+                                        outputRange: [0.75, 1]
+                                    })
+                                }
+                            ]
+                        }
+                    ]}
                 >
-                    <input type="hidden" name="form-name" value="contact" />
-                    <Text style={[styles.text, styles.label]}>
-                        Want to be notified when we're ready for you to start
-                        partying?
-                    </Text>
-                    <View style={styles.inputContainer}>
-                        <TextInput
-                            autoCompleteType="email"
-                            blurOnSubmit={true}
-                            keyboardAppearance="light"
-                            keyboardType="email-address"
-                            style={{
-                                backgroundColor: "white",
-                                borderRadius: 20,
-                                height: 40,
-                                paddingHorizontal: 16,
-                                paddingVertical: 12
-                            }}
-                            placeholder="Your email here"
-                            onChange={({ nativeEvent }) =>
-                                setEmail(nativeEvent.text)
-                            }
-                        />
-                    </View>
-                    <Touchable onPress={handleSubmit}>
-                        <View style={styles.button}>
-                            <Text style={styles.text}>GO</Text>
+                    <form
+                        style={{ display: "flex", flexDirection: "row" }}
+                        name="contact"
+                        method="post"
+                        data-netlify="true"
+                        data-netlify-honeypot="bot-field"
+                        onSubmit={handleSubmit}
+                    >
+                        <input type="hidden" name="form-name" value="contact" />
+                        <Text style={[styles.text, styles.label]}>
+                            Want to be notified when we're ready for you to
+                            start partying?
+                        </Text>
+                        <View style={styles.inputContainer}>
+                            <TextInput
+                                autoCompleteType="email"
+                                blurOnSubmit={true}
+                                keyboardAppearance="light"
+                                keyboardType="email-address"
+                                style={{
+                                    backgroundColor: "white",
+                                    borderRadius: 20,
+                                    height: 40,
+                                    paddingHorizontal: 16,
+                                    paddingVertical: 12
+                                }}
+                                placeholder="Your email here"
+                                onChange={({ nativeEvent }) =>
+                                    setEmail(nativeEvent.text)
+                                }
+                            />
                         </View>
-                    </Touchable>
-                </form>
+                        <Touchable onPress={handleSubmit}>
+                            <View style={styles.button}>
+                                <Text style={styles.text}>GO</Text>
+                            </View>
+                        </Touchable>
+                    </form>
+                </Animated.View>
             ) : (
                 <View>
                     <Text style={[styles.text, styles.confirmationText]}>
@@ -150,9 +194,24 @@ const App = () => {
                     </Text>
                 </View>
             )}
-            <View style={styles.footer}>
-                <Text style={styles.text}>Orgynize by TCAD</Text>
-            </View>
+            <Animated.View
+                style={[
+                    styles.footer,
+                    {
+                        opacity: opacity,
+                        transform: [
+                            {
+                                scale: opacity.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [0.75, 1]
+                                })
+                            }
+                        ]
+                    }
+                ]}
+            >
+                <Text style={styles.text}>Orgynize by Quxxxn</Text>
+            </Animated.View>
         </View>
     );
 };
