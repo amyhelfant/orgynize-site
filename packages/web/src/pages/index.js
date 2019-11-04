@@ -82,10 +82,20 @@ const App = () => {
             width: screenWidth
         },
         title: {
-            fontSize: widthPercentageToDP("7%"),
+            fontSize:
+                screenWidth < 400
+                    ? widthPercentageToDP("7%")
+                    : widthPercentageToDP("4%"),
             color: "white",
             fontFamily: "Over the Rainbow",
             textAlign: "center"
+        },
+        label: {
+            flex: 1,
+            fontSize:
+                screenWidth < 400
+                    ? widthPercentageToDP("4%")
+                    : widthPercentageToDP("2%")
         }
     });
 
@@ -149,7 +159,11 @@ const App = () => {
                     ]}
                 >
                     <form
-                        style={{ display: "flex", flexDirection: "row" }}
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center"
+                        }}
                         name="contact"
                         method="post"
                         data-netlify="true"
@@ -157,7 +171,7 @@ const App = () => {
                         onSubmit={handleSubmit}
                     >
                         <input type="hidden" name="form-name" value="contact" />
-                        <Text style={[styles.text, styles.label]}>
+                        <Text style={[styles.text, responsiveStyles.label]}>
                             Want to be notified when we're ready for you to
                             start partying?
                         </Text>
