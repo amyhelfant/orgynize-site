@@ -168,7 +168,7 @@ function Home() {
             }
 
             .footer {
-                bottom: 0px;
+                bottom: 2px;
                 left: 0px;
             }
 
