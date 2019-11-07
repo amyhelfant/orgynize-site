@@ -1,5 +1,8 @@
 import Head from "next/head";
 import Flexbox from "flexbox-react";
+import FadeIn from 'react-fade-in';
+import Zoom from 'react-reveal/Zoom';
+import Flip from 'react-reveal/Flip';
 
 const encode = data => {
   return Object.keys(data)
@@ -8,7 +11,6 @@ const encode = data => {
 };
 
 function Home() {
-  const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 1224 });
   const [email, setEmail] = React.useState(null);
   const handleSubmit = e => {
     e.preventDefault();
@@ -48,26 +50,6 @@ function Home() {
         }
       `}</style>
       <style jsx>{`
-      @keyframes bounceIn{
-  0%{
-    opacity: 0;
-    transform: scale(0.3) translate3d(0,0,0);
-  }
-  50%{
-    opacity: 0.9;
-    transform: scale(1.1);
-  }
-  80%{
-    opacity: 1;
-    transform: scale(0.89);
-  }
-  100%{
-    opacity: 1;
-    transform: scale(1) translate3d(0,0,0);
-  }
-}
-
-
         h1 {
           font-family: "Sedgwick Ave Display";
           text-align: center;
@@ -85,10 +67,6 @@ function Home() {
 
         .logo {
           object-fit: contain;
-          animation-name: bounceIn;
-  animation-duration: 450ms;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
         }
 
         button {
@@ -130,17 +108,21 @@ function Home() {
         maxWidth="100vw"
       >
         <Flexbox flexGrow={1} marginBottom={12}>
-          <h1>{isDesktopOrLaptop}</h1>
+            <Flip top cascade delay={1000}>
           <h1>For party planners that are not freaks in the spreadsheets</h1>
+          </Flip>
         </Flexbox>
+
         <Flexbox flexGrow={1} marginTop={12} marginBottom={12}>
-          <img className="logo" src="/logo.png" />
+          <Zoom><img className="logo" src="/logo.png" /></Zoom>
         </Flexbox>
+
         <Flexbox
           flexGrow={1}
           flexDirection="row"
           justifyContent="space-between"
         >
+            <Flip top cascade delay={1000}>
           <form
             name="contact"
             method="post"
@@ -161,9 +143,12 @@ function Home() {
             />
             <button type="submit">Go</button>
           </form>
+          </Flip>
         </Flexbox>
         <Flexbox flexGrow={1} width="100%">
+        <Flip top cascade delay={1000}>
           <p className="footer">Orgynize by Quxxxn</p>
+          </Flip>
         </Flexbox>
       </Flexbox>
     </>
