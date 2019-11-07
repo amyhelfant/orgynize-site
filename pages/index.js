@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Flexbox from 'flexbox-react';
 
 const encode = data => {
   return Object.keys(data)
@@ -42,7 +43,7 @@ function Home() {
           font-family: "Abel";
           margin: 0;
           padding: 0;
-          overflow: hidden;
+          height: 100vh;
         }
       `}</style>
       <style jsx>{`
@@ -51,48 +52,43 @@ function Home() {
           text-align: center;
         }
 
-        .container {
-          align-items: center;
-          display: flex;
-          flex-direction: column;
-          height: 100vh;
-          justify-content: center;
-          padding: 20px;
-          position: relative;
-          overflow: hidden;
-          width: 100vw;
+        .footer {
+          border-top: 0.5px solid white;
+          padding: 8px 16px;
+          width: calc(100% - 32px);
         }
 
         .logo {
-          object-fit: contain;
+            object-fit: contain;
         }
 
-        .footer {
-          border-top: 0.5px solid white;
-          width: calc(100vw - 40px);
-        }
-
-        .image {
-          display: flex;
-          flex: auto;
-          justify-content: center;
-          height: 100%;
-        }
-        img {
-          object-fit: contain;
+        button {
+            display: inline-block;
+            border: none;
+            padding: 1rem 2rem;
+            margin: 0;
+            text-decoration: none;
+            background: #0069ed;
+            color: #ffffff;
+            font-family: sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background 250ms ease-in-out,
+                        transform 150ms ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
       `}</style>
-      <div className="container">
-        <h1>For party planners that are not freaks in the spreadsheets</h1>
-        <div className="image">
+      <Flexbox flexDirection="column" maxHeight="90vh" justifyContent="center" alignItems="center" maxWidth="100vw">
+        <Flexbox flexGrow={1}>
+            <h1>For party planners that are not freaks in the spreadsheets</h1>
+        </Flexbox>
+        <Flexbox flexGrow={2}>
           <img className="logo" src="/logo.png" />
-        </div>
+        </Flexbox>
+        <Flexbox flexGrow={1}>
         <form
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center"
-          }}
           name="contact"
           method="post"
           data-netlify="true"
@@ -106,10 +102,11 @@ function Home() {
           <input name="email" placeholder="Your email here" type="text" />
           <button>Go</button>
         </form>
-        <div className="footer">
-          <p>Orgynize by Quxxxn</p>
-        </div>
-      </div>
+        </Flexbox>
+        <Flexbox flexGrow={1} width="100%">
+          <p className="footer">Orgynize by Quxxxn</p>
+        </Flexbox>
+      </Flexbox>
     </>
   );
 }
