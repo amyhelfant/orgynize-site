@@ -24,6 +24,7 @@
   "homepage": "https://github.com/davitykale/orgynize-site#readme",
   "dependencies": {
     "next": "^9.1.2",
+    "next-seo": "^2.2.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-reveal": "^1.2.2"

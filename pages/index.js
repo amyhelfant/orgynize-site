@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Zoom from "react-reveal/Zoom";
 import Flip from "react-reveal/Flip";
+import { NextSeo } from "next-seo";
 
 const encode = data => {
   return Object.keys(data)
@@ -37,6 +38,25 @@ function Home() {
           rel="stylesheet"
         />
       </Head>
+      <NextSeo
+        title="Orgynize (by Quxxxn)"
+        description="For party planners that are not freaks in the spreadsheets."
+        openGraph={{
+          type: "website",
+          locale: "en_US",
+          url: "https://www.orgynize.app/",
+          site_name: "Orgynize (by Quxxxn)",
+          images: [
+            {
+              url:
+                "https://github.com/davitykale/orgynize-site/blob/master/public/logo.png?raw=true",
+              width: 800,
+              height: 600,
+              alt: "Orgynize (by Quxxxn)"
+            }
+          ]
+        }}
+      />
       <style global jsx>{`
         html,
         body {
