@@ -1,8 +1,6 @@
 import Head from "next/head";
-import Flexbox from "flexbox-react";
-import FadeIn from 'react-fade-in';
-import Zoom from 'react-reveal/Zoom';
-import Flip from 'react-reveal/Flip';
+import Zoom from "react-reveal/Zoom";
+import Flip from "react-reveal/Flip";
 
 const encode = data => {
   return Object.keys(data)
@@ -12,6 +10,7 @@ const encode = data => {
 
 function Home() {
   const [email, setEmail] = React.useState(null);
+  const [showConfirmation, setShowConfirmation] = React.useState(false);
   const handleSubmit = e => {
     e.preventDefault();
     if (email == null || email.length <= 0) {
@@ -41,20 +40,51 @@ function Home() {
       <style global jsx>{`
         html,
         body {
-          background: black;
+          background-color: black;
           color: white;
           font-family: "Abel";
           margin: 0;
           padding: 0;
-          height: 100vh;
+          position: relative;
+
+          background-image: url("/logo.png");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-position: center;
+          background-size: auto 65%;
+          background-origin: content-box;
+        }
+
+        @media only screen and (max-width: 600px) {
+          body {
+            background-size: auto 50%;
+          }
         }
       `}</style>
       <style jsx>{`
-        h1 {
-          font-family: "Sedgwick Ave Display";
+        p.header {
+          box-sizing: border-box;
           text-align: center;
-          font-size: 3em;
+          font-size: 3.2em;
           z-inex: 10;
+          box-sizing:border-box;
+          padding: 12px 20px;
+        }
+
+        .div1 {
+            height: 30%;
+        }
+
+        .div2 {
+            height: 40%;
+        }
+
+        .div3 {
+            height: 20%;
+        }
+
+        .div4 {
+            height: 10%;
         }
 
         .footer {
@@ -63,10 +93,18 @@ function Home() {
           width: calc(100% - 32px);
           padding-bottom: 0px
           margin-top: 12px;
+          position: fixed;
+          bottom: 8px;
+          left: 8px;
         }
 
         .logo {
           object-fit: contain;
+        }
+
+        form,
+        .foo {
+            margin-bottom: 40px;
         }
 
         button {
@@ -99,58 +137,88 @@ function Home() {
             font-size: 1.5em;
             margin-right: 20px;
         }
+
+        .container {
+            align-items: center;
+            box-sizing: border-box;
+            height: 90vh;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        @media only screen and (max-width: 600px) {
+            p.header {
+                box-sizing: border-box;
+                font-size: 2em;
+                word-wrap: normal !important;
+                padding: 0 16px;
+                word-break: normal !important;
+            }
+
+            .logo {
+                max-height: 350px;
+            }
+
+            form {
+                display: flex;
+                margin-bottom: 100px;
+                padding: 0;
+                box-sizing:border-box;
+            }
+
+            .footer {
+                bottom: 0px;
+                left: 0px;
+            }
+
+            label {
+                font-size: 1em;
+                display: block;
+            }
+        }
       `}</style>
-      <Flexbox
-        flexDirection="column"
-        maxHeight="90vh"
-        justifyContent="center"
-        alignItems="center"
-        maxWidth="100vw"
-      >
-        <Flexbox flexGrow={1} marginBottom={12}>
-            <Flip top cascade delay={1000}>
-          <h1>For party planners that are not freaks in the spreadsheets</h1>
-          </Flip>
-        </Flexbox>
-
-        <Flexbox flexGrow={1} marginTop={12} marginBottom={12}>
-          <Zoom><img className="logo" src="/logo.png" /></Zoom>
-        </Flexbox>
-
-        <Flexbox
-          flexGrow={1}
-          flexDirection="row"
-          justifyContent="space-between"
-        >
-            <Flip top cascade delay={1000}>
-          <form
-            name="contact"
-            method="post"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
-            onSubmit={handleSubmit}
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <label>
-              Want to be notified when we're ready for you to start partying?
-            </label>
-            <input
-              name="email"
-              onChange={evt => setEmail(evt.target.value)}
-              placeholder="Your email here"
-              type="text"
-              value={email}
-            />
-            <button type="submit">Go</button>
-          </form>
-          </Flip>
-        </Flexbox>
-        <Flexbox flexGrow={1} width="100%">
+      <div className="container">
         <Flip top cascade delay={1000}>
-          <p className="footer">Orgynize by Quxxxn</p>
+          <p className="header">
+            For party planners that are not freaks in the <span></span>
+            spreadsheets
+          </p>
+        </Flip>
+
+        <div>
+          <Flip top cascade delay={1000}>
+            {!showConfirmation ? (
+              <form
+                name="contact"
+                method="post"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <label>
+                  Want to be notified when we're ready for you to start
+                  partying?
+                </label>
+                <input
+                  name="email"
+                  onChange={evt => setEmail(evt.target.value)}
+                  placeholder="Your email here"
+                  type="text"
+                  value={email}
+                />
+                <button type="submit">Go</button>
+              </form>
+            ) : (
+              <label className="foo">Stay tuned{"..."}</label>
+            )}
           </Flip>
-        </Flexbox>
-      </Flexbox>
+          <Flip top cascade delay={1000}>
+            <p className="footer">Orgynize by Quxxxn</p>
+          </Flip>
+        </div>
+      </div>
     </>
   );
 }
