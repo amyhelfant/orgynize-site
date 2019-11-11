@@ -224,7 +224,7 @@ function Home() {
                 <input
                   name="email"
                   onChange={evt => setEmail(evt.target.value)}
-                  placeholder="Your email here"
+                  placeholder="hotness@sexy.com"
                   type="text"
                   value={email}
                 />
