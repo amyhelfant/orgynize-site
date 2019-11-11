@@ -202,7 +202,7 @@ function Home() {
         <Flip top cascade delay={1000}>
           <p className="header">
             For party planners that are not freaks in the <span></span>
-            spreadsheets
+            spreadsheets.
           </p>
         </Flip>
 
